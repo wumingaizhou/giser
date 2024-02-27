@@ -28,7 +28,7 @@ webgis方向：
 
 - vue，react
 
-- 百度，高德API，Arcgis apl for js
+- 百度，高德API，Arcgis apl for js，openlayers
 
   ​
 我的CSDN博客：[wu有瑜](https://blog.csdn.net/zmlswmlp?type=blog)
