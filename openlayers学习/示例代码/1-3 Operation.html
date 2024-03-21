@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/libs/OL10/ol.js"></script>
+  <link rel="stylesheet" href="/css/ol.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      top: 50px;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ToolLib">
+    <input type="button" class="ButtonLib" id="zoom-out" value="单击缩小">
+    <input type="button" class="ButtonLib" id="zoom-in" value="单击放大">
+    <input type="button" class="ButtonLib" id="panto" value="平移到[中国]">
+    <input type="button" class="ButtonLib" id="restore" value="复位">
+  </div>
+  <div id="map"></div>
+  <script>
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM({
+            wrapX: false
+          })
+        }),
+      ],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 2,
+        minZoom: 1,
+        maxZoom: 12,
+      })
+    })
+    const oriView = map.getView()
+    const oriZoom = oriView.getZoom()
+    const oriCenter = oriView.getCenter()
+    const oriRotation = oriView.getRotation()
+    // 单击缩小功能
+    const buttonZoomOut = document.querySelector('#zoom-out')
+    buttonZoomOut.addEventListener('click', (e) => {
+      const view = map.getView();
+      const zoom = view.getZoom();
+      view.setZoom(zoom - 1)
+
+    })
+    // 单击放大功能
+    const buttonZoomIn = document.querySelector('#zoom-in')
+    buttonZoomIn.addEventListener('click', (e) => {
+      const view = map.getView();
+      const zoom = view.getZoom();
+      view.setZoom(zoom + 1)
+
+    })
+    // 平移到中国
+    const buttonPanTo = document.querySelector('#panto')
+    buttonPanTo.addEventListener('click', (e) => {
+      const view = map.getView();
+      const wh = ol.proj.fromLonLat([105, 35])//投影
+      view.setCenter(wh)
+      view.setZoom(5)
+    })
+    // 复位到初始状态
+    const buttonRestore = document.querySelector('#restore')
+    buttonRestore.addEventListener('click', (e) => {
+      const view = map.getView()
+      view.setCenter(oriCenter)
+      view.setZoom(oriZoom)
+      view.setRtation(oriRotation)
+    })
+  </script>
+</body>
+
+</html>

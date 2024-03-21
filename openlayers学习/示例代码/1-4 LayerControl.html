@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- 设计思路：书本的思路是一个面向对象思想，他主要设计了一个函数，只要传入列表ul的id和地图容器就能实现图层切换功能，是一个封装函数的思想 -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/libs/OL10/ol.js"></script>
+  <link rel="stylesheet" href="/css/ol.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    body,
+    html,
+    div,
+    ul,
+    li,
+    iframe,
+    p,
+    img {
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      font-family: "微软雅黑";
+    }
+
+    #layerControl {
+      position: absolute;
+      bottom: 5px;
+      min-width: 200px;
+      max-height: 200px;
+      right: 0px;
+      top: 5px;
+      z-index: 2001;
+      color: #ffffff;
+      background-color: #4c4e5a;
+      border-width: 10px;
+      border-radius: 10px;
+      border-color: #000, #000, #000, #000;
+    }
+
+    #layerControl .title {
+      font-size: 20px;
+      padding-left: 8px;
+      padding-top: 5px;
+    }
+
+    .layerTree li {
+      list-style: none;
+      padding-left: 8px;
+      padding-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map">
+    <!-- 创建图层切换容器 -->
+    <div id="layerControl" class="layerControl">
+      <div class="title">图层列表</div>
+      <ul id="layerTree" class="layerTree"></ul>
+    </div>
+  </div>
+  <script>
+    // map里的图层数组
+    const layer = new Array()
+    // 图层名称数组
+    const layerName = new Array()
+    // 图层可见性数组
+    const layerVisibility = new Array()
+
+    // 封装函数,主要功能函数
+    function loadLayersControl(map, id) {
+      // id是ul列表的id，map是地图容器
+      // 获取图层列表容器
+      const mapList = document.getElementById(id)
+      // 获取地图中所有图层
+      const mapALLLayers = map.getLayers()
+      // 图层切换功能
+      for (let i = 0; i < mapALLLayers.getLength(); i++) {
+        // 获取图层
+        layer[i] = mapALLLayers.item(i)
+        // 获取图层名称
+        layerName[i] = layer[i].get('name')
+        // 获取图层可见性
+        layerVisibility[i] = layer[i].getVisible()
+        // 新增li元素，用于保存图层
+        const elementli = document.createElement('li')
+        // 将li元素添加到ul里
+        mapList.appendChild(elementli)
+        // 为li创建checkbox
+        const elementInput = document.createElement('input')
+        elementInput.type = 'checkbox'
+        elementInput.name = mapALLLayers
+        elementli.appendChild(elementInput)
+        // 为li里设置图层名字
+        const elementSpan = document.createElement('span')
+        elementSpan.innerHTML = (layerName[i])
+        elementli.appendChild(elementSpan)
+        // 设置图层默认显示状态
+        if (layerVisibility[i]) {
+          elementInput.checked = true
+        }
+        else {
+          elementInput.checked = false
+        }
+        // 为checkbox添加变更事件
+        addChangeEvent(elementInput, layer[i])
+      }
+    }
+    function addChangeEvent(element, layer) {
+      // 变更事件就是点击显示或者取消图层
+      element.addEventListener('click', (e) => {
+        if (element.checked) {
+          layer.setVisible(true)
+        }
+        else {
+          layer.setVisible(false)
+        }
+      })
+    }
+
+    // 要添加的图层
+    const TiandiMap_vec = new ol.layer.Tile({
+      name: "天地图矢量图层",
+      source: new ol.source.XYZ({
+        url: "http://t0.tianditu.gov.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=你的密匙",
+        wrapX: false
+      })
+    })
+    const TiandiMap_cva = new ol.layer.Tile({
+      name: "天地图矢量标记图层",
+      source: new ol.source.XYZ({
+        url: "http://t0.tianditu.gov.cn/cva_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=你的密匙",
+        wrapX: false
+      }),
+      visible: false
+    })
+    const TiandiMap_img = new ol.layer.Tile({
+      name: "天地图影像图层",
+      source: new ol.source.XYZ({
+        url: "http://t0.tianditu.gov.cn/img_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=你的密匙",
+        wrapX: false
+      }),
+      visible: false
+    })
+    const TiandiMap_cia = new ol.layer.Tile({
+      name: "天地图影像标记图层",
+      source: new ol.source.XYZ({
+        url: "http://t0.tianditu.gov.cn/cia_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=你的密匙",
+        wrapX: false,
+      }),
+      visible: false
+    })
+
+
+    const map = new ol.Map({
+      target: 'map',
+      layers: [TiandiMap_vec, TiandiMap_cva, TiandiMap_img, TiandiMap_cia],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 2
+      })
+    })
+    loadLayersControl(map, "layerTree")
+  </script>
+</body>
+
+</html>

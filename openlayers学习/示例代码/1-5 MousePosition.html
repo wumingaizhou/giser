@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/libs/OL10/ol.js"></script>
+  <link rel="stylesheet" href="/css/ol.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    .custom-mouse-position {
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      font-family: '微软雅黑';
+    }
+
+    #mouse-position {
+      float: left;
+      position: absolute;
+      bottom: 5px;
+      width: 200px;
+      height: 20px;
+      z-index: 2000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map">
+    <div id="mouse-position"></div>
+  </div>
+  <script>
+    // 实例化MousePosition
+    const addMousePotion = new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(4),
+      projection: 'EPSG:4326',
+      className: 'custom-mouse-position',
+      target: document.querySelector('#mouse-position'),
+      undefinedHTML: '&nbsp;'
+    })
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM({
+            wrapX: false
+          })
+        }),
+      ],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 2
+      }),
+      controls: [addMousePotion],
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/libs/OL10/ol.js"></script>
+  <link rel="stylesheet" href="/css/ol.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    .ol-overlaycontainer-stopevent .ol-overlaycontainer-stopevent>div>div {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div id="map"></div>
+  <script>
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM({
+            wrapX: false
+          })
+        }),
+      ],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 2
+      }),
+      controls: [
+        new ol.control.OverviewMap({
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.OSM({
+              })
+            })
+          ],
+          collapseLabel: '\u00BB',
+          label: '\u00BB',
+          collapsed: false
+
+        })
+      ],
+    })
+  </script>
+</body>
+
+</html>

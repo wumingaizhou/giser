@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/libs/OL10/ol.js"></script>
+  <link rel="stylesheet" href="/css/ol.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    .btn {
+      z-index: 200;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map">
+    <input type="button" class="btn" value="点击移动到北京">
+  </div>
+  <script>
+    const btn = document.querySelector('.btn')
+    btn.addEventListener('click', (e) => {
+      const view = map.getView()
+      view.animate({ center: ol.proj.fromLonLat([116, 35]), duration: 500 }, { zoom: 8, duration: 500 })
+    })
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM({
+            wrapX: false
+          })
+        }),
+      ],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 2
+      })
+    })
+  </script>
+</body>
+
+</html>

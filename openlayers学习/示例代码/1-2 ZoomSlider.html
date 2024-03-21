@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/libs/OL10/ol.js"></script>
+  <link rel="stylesheet" href="/css/ol.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    #map .ol.zoomslider {
+      background-color: transparent;
+      top: 2.3em;
+    }
+
+    #map .ol-touch .ol-zoom .ol-zoom-out {
+      margin-top: 212px;
+    }
+
+    #map .ol-touch .ol.zoomslider {
+      top: 2.75em;
+    }
+
+    #map .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
+    #map .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
+      top: 3px;
+    }
+
+    #map .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+    #map .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+      top: 232px;
+    }
+
+    #map .ol-zoom-extent {
+      top: 280px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM({
+            wrapX: false
+          })
+        }),
+      ],
+      view: new ol.View({
+        center: [0, 0],
+        zoom: 2
+      })
+    })
+    // 实例化ol.control.ZoomSlider控件并加载到地图容器中
+    const zoomslider = new ol.control.ZoomSlider()
+    map.addControl(zoomslider)
+    // 实例化ol.control.zoomToExtent控件并加载到地图容器中
+    const zoomToExtent = new ol.control.ZoomToExtent({
+      extent: [13100000, 4290000, 13200000, 5210000]
+    })
+    map.addControl(zoomToExtent)
+  </script>
+</body>
+
+</html>
