@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>基本地图控件</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
     #map {
@@ -14,6 +14,7 @@
       position: absolute;
     }
 
+    /* 下列几个是控制ZoomSlider和zoomToExtent的位置，不然会重叠显示不出来 */
     #map .ol.zoomslider {
       background-color: transparent;
       top: 2.3em;
@@ -27,6 +28,11 @@
       top: 2.75em;
     }
 
+    #map .ol-zoom-extent {
+      top: 280px;
+    }
+
+    /* 下面的作用是可以让缩放滑块控件（ZoomSlider）能够通过鼠标拖动，不然只能点击切换位置，具体可以删除对比 */
     #map .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
     #map .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
       top: 3px;
@@ -35,10 +41,6 @@
     #map .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
     #map .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
       top: 232px;
-    }
-
-    #map .ol-zoom-extent {
-      top: 280px;
     }
   </style>
 </head>
@@ -60,10 +62,13 @@
         zoom: 2
       })
     })
-    // 实例化ol.control.ZoomSlider控件并加载到地图容器中
+
+    // 实例化ol.control.ZoomSlider控件并加载到地图容器中，zoomSlider就是左上角可以控制缩放的滑块
     const zoomslider = new ol.control.ZoomSlider()
+    //addControl方法可以加载任何地图控件到地图中
     map.addControl(zoomslider)
-    // 实例化ol.control.zoomToExtent控件并加载到地图容器中
+
+    // 实例化ol.control.zoomToExtent控件并加载到地图容器中，效果是点击左上角的那个‘E’，可以缩放到指定位置。（当然，E可以改成其他文字）
     const zoomToExtent = new ol.control.ZoomToExtent({
       extent: [13100000, 4290000, 13200000, 5210000]
     })

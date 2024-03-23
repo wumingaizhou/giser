@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>鹰眼图</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
     #map {
@@ -14,6 +14,7 @@
       position: absolute;
     }
 
+    /* 设置鹰眼图的图边框 */
     .ol-overlaycontainer-stopevent .ol-overlaycontainer-stopevent>div>div {
       border: 2px solid red;
     }
@@ -37,9 +38,11 @@
         center: [0, 0],
         zoom: 2
       }),
+
       controls: [
         new ol.control.OverviewMap({
           layers: [
+            // 鹰眼图的source要和layers里面的source一样
             new ol.layer.Tile({
               source: new ol.source.OSM({
               })

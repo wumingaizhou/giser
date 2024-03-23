@@ -4,34 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>第一个地图</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
+    /* 初始化界面的样式 */
     #map {
       height: 100%;
       width: 100%;
       position: absolute;
+      /*如果有时候发现你的代码没问题但是就是显示不出地图，可能是没有设置绝对定位 */
     }
   </style>
 </head>
 
 <body>
-
+  <!-- 地图容器，id为map -->
   <div id="map"></div>
   <script>
     const map = new ol.Map({
-      target: 'map',
+      target: 'map',  //target的值要和div的id一致
       layers: [
         new ol.layer.Tile({
+          //使用osm当作底图
           source: new ol.source.OSM({
             wrapX: false
           })
         }),
       ],
       view: new ol.View({
-        center: [0, 0],
-        zoom: 2
+        center: [0, 0], //地图中心
+        zoom: 2   //初始级别
       })
     })
   </script>

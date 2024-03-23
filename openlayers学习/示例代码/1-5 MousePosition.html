@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>显示鼠标位置的经纬度</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
     #map {
@@ -14,12 +14,7 @@
       position: absolute;
     }
 
-    .custom-mouse-position {
-      color: rgb(0, 0, 0);
-      font-size: 16px;
-      font-family: '微软雅黑';
-    }
-
+    /* 设置控件的位置 */
     #mouse-position {
       float: left;
       position: absolute;
@@ -27,6 +22,13 @@
       width: 200px;
       height: 20px;
       z-index: 2000;
+    }
+
+    /* 设置显示经纬度的样式 */
+    .custom-mouse-position {
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      font-family: '微软雅黑';
     }
   </style>
 </head>

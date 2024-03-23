@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<!-- 设计思路：书本的思路是一个面向对象思想，他主要设计了一个函数，只要传入列表ul的id和地图容器就能实现图层切换功能，是一个封装函数的思想 -->
+<!-- 设计思路：书本的思路是主要设计了一个函数，只要传入列表ul的id和地图容器就能实现图层切换功能，是一个封装函数的思想 -->
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>图层切换</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
     #map {
@@ -114,8 +114,9 @@
         addChangeEvent(elementInput, layer[i])
       }
     }
+
+    // 变更事件就是点击显示或者取消图层
     function addChangeEvent(element, layer) {
-      // 变更事件就是点击显示或者取消图层
       element.addEventListener('click', (e) => {
         if (element.checked) {
           layer.setVisible(true)
@@ -126,7 +127,7 @@
       })
     }
 
-    // 要添加的图层
+    // 要添加的图层，密匙自己申请
     const TiandiMap_vec = new ol.layer.Tile({
       name: "天地图矢量图层",
       source: new ol.source.XYZ({

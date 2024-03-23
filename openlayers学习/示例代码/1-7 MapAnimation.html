@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>动画缩放</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
     #map {
@@ -26,9 +26,11 @@
     <input type="button" class="btn" value="点击移动到北京">
   </div>
   <script>
+    // 动画缩放和普通平移不一样，动画缩放更加舒缓，可以设置动画时间或者动画方式
     const btn = document.querySelector('.btn')
     btn.addEventListener('click', (e) => {
       const view = map.getView()
+      //view里面的animate方法，center设置缩放位置，duration设置时间，具体参数看官网
       view.animate({ center: ol.proj.fromLonLat([116, 35]), duration: 500 }, { zoom: 8, duration: 500 })
     })
     const map = new ol.Map({

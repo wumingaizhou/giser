@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="/libs/OL10/ol.js"></script>
+  <title>简单的交互功能</title>
+  <script src="/libs/OL9/ol.js"></script>
   <link rel="stylesheet" href="/css/ol.css">
   <style>
     #map {
@@ -18,13 +18,16 @@
 </head>
 
 <body>
+  <!-- 功能条 -->
   <div class="ToolLib">
     <input type="button" class="ButtonLib" id="zoom-out" value="单击缩小">
     <input type="button" class="ButtonLib" id="zoom-in" value="单击放大">
     <input type="button" class="ButtonLib" id="panto" value="平移到[中国]">
     <input type="button" class="ButtonLib" id="restore" value="复位">
   </div>
+
   <div id="map"></div>
+
   <script>
     const map = new ol.Map({
       target: 'map',
@@ -38,14 +41,16 @@
       view: new ol.View({
         center: [0, 0],
         zoom: 2,
-        minZoom: 1,
-        maxZoom: 12,
+        minZoom: 1,   //最小级别缩放
+        maxZoom: 12,  //最大级别缩放
       })
     })
+    // 获取地图原始的view，缩放级别，中心，旋转
     const oriView = map.getView()
     const oriZoom = oriView.getZoom()
     const oriCenter = oriView.getCenter()
     const oriRotation = oriView.getRotation()
+
     // 单击缩小功能
     const buttonZoomOut = document.querySelector('#zoom-out')
     buttonZoomOut.addEventListener('click', (e) => {
