@@ -24,7 +24,7 @@
 
 1.打开代码的方式：点.sln文件就可以
 
-![l](readme.assets/sln.png)
+![l](D:\Csharp代码库\测绘程序设计\readme.assets/sln.png)
 
 2.练习题的示例代码是不同的老师设计的，所以代码风格是不一样的，第一、二个练习是李英冰老师写的，他和第三个练习的老师的代码风格不一样，我的建议是学李英冰老师的，不同的功能单独用代码文件写，实现类的封装。
 
@@ -36,7 +36,28 @@
 
 练习一：
 
-![1](readme.assets/1.png)
+![1](D:\Csharp代码库\测绘程序设计\readme.assets/1.png)
 
-练习三：![3](readme.assets/3.png)
+练习三：![3](D:\Csharp代码库\测绘程序设计\readme.assets\3.png)
 
+#### 控件的总结：
+
+**1.如何设置控件的Text不可以更改：**改控件的ReadOnly为True
+
+![nipaste_2024-05-16_16-40-3](readme.assets/Snipaste_2024-05-16_16-40-39.png)
+
+**2.鼠标光标如何更改：**
+
+   1）看看控件有没有cursor属性
+
+   2）在控件的“事件”里找到MouseMove，设置个事件名，然后点一下
+
+![71584898013](readme.assets\1715848980133.png)
+
+写入以下代码，我这里的效果是小手
+
+![71584904824](readme.assets\1715849048245.png)
+
+**3.tabControl怎么置于底层：**把Alignment改成bottom
+
+![71584932797](readme.assets\1715849327977.png)
