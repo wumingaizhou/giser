@@ -24,7 +24,7 @@
 
 1.打开代码的方式：点.sln文件就可以
 
-![l](D:\Csharp代码库\测绘程序设计\readme.assets/sln.png)
+![l](readme.assets/sln.png)
 
 2.练习题的示例代码是不同的老师设计的，所以代码风格是不一样的，第一、二个练习是李英冰老师写的，他和第三个练习的老师的代码风格不一样，我的建议是学李英冰老师的，不同的功能单独用代码文件写，实现类的封装。
 
@@ -36,9 +36,9 @@
 
 练习一：
 
-![1](D:\Csharp代码库\测绘程序设计\readme.assets/1.png)
+![1](readme.assets/1.png)
 
-练习三：![3](D:\Csharp代码库\测绘程序设计\readme.assets\3.png)
+练习三：![3](readme.assets\3.png)
 
 #### 控件的总结：
 
