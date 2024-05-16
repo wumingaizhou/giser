@@ -52,7 +52,7 @@
 
    2）在控件的“事件”里找到MouseMove，设置个事件名，然后点一下
 
-![71584898013](readme.assets\1715849048245.png)
+![71584898013](readme.assets/1715849048245.png)
 
 写入以下代码，我这里的效果是小手
 
@@ -60,4 +60,4 @@
 
 **3.tabControl怎么置于底层：**把Alignment改成bottom
 
-![71584932797](readme.assets\1715848980133.png)
+![71584932797](readme.assets/1715849327977.png)
