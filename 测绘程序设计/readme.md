@@ -56,8 +56,8 @@
 
 写入以下代码，我这里的效果是小手
 
-![71584904824](readme.assets\1715849048245.png)
+![hap](D:\github\gis\测绘程序设计\readme.assets\Chap1.png)
 
 **3.tabControl怎么置于底层：**把Alignment改成bottom
 
-![71584932797](readme.assets\1715849327977.png)
+![71584932797](D:\github\gis\测绘程序设计\readme.assets\1715849327977.png)
