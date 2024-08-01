@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Dianli")]
+[assembly: AssemblyTitle("DianLi")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("Dianli")]
+[assembly: AssemblyProduct("DianLi")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("fc4578e6-5955-47ef-91fd-866e1feaab88")]
+[assembly: Guid("b0823859-e712-457d-a8a3-cc309b714fd9")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

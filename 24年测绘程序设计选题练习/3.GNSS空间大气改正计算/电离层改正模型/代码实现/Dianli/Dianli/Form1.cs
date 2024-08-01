@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Dianli
+namespace DianLi
 {
     public partial class Form1 : Form
     {
@@ -17,92 +17,96 @@ namespace Dianli
         {
             InitializeComponent();
         }
-        List<Satellite> satellites = new List<Satellite>();//所有卫星的集合
+        List<Session> sessions = new List<Session>();
+        Session SessionP = new Session(-2225669.7744, 4998936.1598, 3265908.9678);
+        double secondsOfDay = 0;
 
-        private void toolOpen_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
             try
             {
-                dataGridView1.Rows.Clear();
-                satellites.Clear();
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.FileName = "输入数据";
                 openFileDialog1.Filter = "|*.txt";
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                if(openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
+                    sessions.Clear();
                     var reader = new StreamReader(openFileDialog1.FileName);
-                    var time = new Time(reader.ReadLine());//第一行是时间
-                    while (!reader.EndOfStream)
+                    secondsOfDay = Algo.GetSeconds(reader.ReadLine());
+                    while(!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
                         if(line.Length > 0)
                         {
-                            var satellite = new Satellite(line,time);
-                            satellites.Add(satellite);
+                            var temp = new Session(line);
+                            sessions.Add(temp);
                         }
                     }
                     reader.Close();
-                    //显示数据
-                    for(int i = 0;i < satellites.Count;i++)
+                    dataGridView1.Rows.Clear();
+                    for(int i = 0;i < sessions.Count;i++)
                     {
                         dataGridView1.Rows.Add();
-                        dataGridView1.Rows[i].Cells[0].Value = satellites[i].name;
-                        dataGridView1.Rows[i].Cells[1].Value = satellites[i].X;
-                        dataGridView1.Rows[i].Cells[2].Value = satellites[i].Y;
-                        dataGridView1.Rows[i].Cells[3].Value = satellites[i].Z;
+                        dataGridView1.Rows[i].Cells[0].Value = sessions[i].name;
+                        dataGridView1.Rows[i].Cells[1].Value = sessions[i].X;
+                        dataGridView1.Rows[i].Cells[2].Value = sessions[i].Y;
+                        dataGridView1.Rows[i].Cells[3].Value = sessions[i].Z;
                     }
-                    MessageBox.Show("导入数据成功");
                     toolStripStatusLabel1.Text = "状态：导入数据成功";
+                    MessageBox.Show("导入成功");
+                    tabControl1.SelectedIndex = 0;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+
                 throw ex;
             }
         }
 
-        private void toolCal_Click(object sender, EventArgs e)
-        {
-            if(satellites.Count != 0)
-            {
-                string res = "卫星编号：  高度角：  方位角：  电离层延迟距离：\n";
-                foreach (Satellite d in satellites)
-                {
-                    res += $"{d.name}  {(d.E * 180 / Math.PI):F3}  {(d.A * 180 / Math.PI):F3}  {d.IPP_s:F3}\n";
-                }
-                richTextBox1.Text = res;
-                toolStripStatusLabel1.Text = "状态：计算成功";
-                MessageBox.Show("计算成功");
-                tabControl1.SelectedIndex = 1;
-            }
-            else
-            {
-                MessageBox.Show("未导入数据！");
-            }
-        }
-
-        private void toolSave_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
             try
             {
-                if(richTextBox1.Text != "")
+                if(sessions.Count > 0)
+                {
+                    Algo.GetAandE(ref sessions, SessionP);
+                    Algo.GetFaiM(ref sessions);
+                    Algo.GetYanCi(ref sessions, secondsOfDay);
+                    toolStripStatusLabel1.Text = "状态：计算成功";
+                    MessageBox.Show("计算成功");
+                    tabControl1.SelectedIndex = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sessions.Count > 0)
                 {
                     SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                    saveFileDialog1.FileName = "结果保存";
                     saveFileDialog1.Filter = "|*.txt";
-                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    if(saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         var writer = new StreamWriter(saveFileDialog1.FileName);
                         writer.Write(richTextBox1.Text);
                         writer.Close();
+                        toolStripStatusLabel1.Text = "状态：保存成功";
+                        MessageBox.Show("保存成功");
                     }
-                    MessageBox.Show("保存成功");
-                }
-                else
-                {
-                    MessageBox.Show("未计算或者导入数据");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+
                 throw ex;
             }
         }

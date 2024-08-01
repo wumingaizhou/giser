@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.34729.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dianli", "Dianli\Dianli.csproj", "{FC4578E6-5955-47EF-91FD-866E1FEAAB88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DianLi", "DianLi\DianLi.csproj", "{B0823859-E712-457D-A8A3-CC309B714FD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FC4578E6-5955-47EF-91FD-866E1FEAAB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC4578E6-5955-47EF-91FD-866E1FEAAB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC4578E6-5955-47EF-91FD-866E1FEAAB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC4578E6-5955-47EF-91FD-866E1FEAAB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0823859-E712-457D-A8A3-CC309B714FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0823859-E712-457D-A8A3-CC309B714FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0823859-E712-457D-A8A3-CC309B714FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0823859-E712-457D-A8A3-CC309B714FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2B98E38C-B84F-4ED5-B5FB-5476F771D64E}
+		SolutionGuid = {BB01AD11-293D-43D5-853E-839B557B1BA8}
 	EndGlobalSection
 EndGlobal

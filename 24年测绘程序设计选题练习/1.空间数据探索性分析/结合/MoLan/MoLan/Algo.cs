@@ -59,6 +59,7 @@ namespace MoLan
                 {
                     Matrix[i, j] = GetWeight(points[i], points[j]);
                     rowSum += Matrix[i, j];
+                    //Matrix[j, i] = GetWeight(points[j], points[i]);
                     //colSum += Matrix[j, i];
                 }
                 for(int k = 0;k < points.Count;k++)
