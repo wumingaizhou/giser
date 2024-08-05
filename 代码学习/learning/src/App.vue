@@ -5,7 +5,9 @@
       <el-container>
         <el-aside width="200px">Aside</el-aside>
         <el-container class="mapContainer">
-          <el-main>Main</el-main>
+          <el-main>
+            <Mapview />
+          </el-main>
         </el-container>
       </el-container>
     </el-container>
@@ -13,11 +15,11 @@
 </template>
 
 <script>
-
+import Mapview from './components/common/Mapview.vue';
 export default {
   name: 'App',
   components: {
-
+    Mapview,
   }
 }
 </script>
